@@ -1,0 +1,43 @@
+"Escribir un programa que almacene las asignaturas de un curso (por ejemplo Matemáticas, Física, Química, Historia y Lengua) en una lista, pregunte al usuario la nota que ha sacado en cada asignatura, y después las muestre por pantalla con el mensaje Enha sacadodondees cada una de las asignaturas de la lista ycada una de las notas correspondientes introducidas por el usuario."
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Lista de asignaturas
+        List<string> asignaturas = new List<string>
+        {
+            "Matemáticas",
+            "Física",
+            "Química",
+            "Historia",
+            "Lengua"
+        };
+
+        // Diccionario para almacenar las notas
+        Dictionary<string, double> notas = new Dictionary<string, double>();
+
+        // Solicitar al usuario la nota de cada asignatura
+        foreach (var asignatura in asignaturas)
+        {
+            Console.Write($"Introduce la nota de {asignatura}: ");
+            double nota;
+            // Validar que la entrada sea un número
+            while (!double.TryParse(Console.ReadLine(), out nota))
+            {
+                Console.WriteLine("Por favor, introduce un número válido.");
+                Console.Write($"Introduce la nota de {asignatura}: ");
+            }
+            notas[asignatura] = nota; // Almacenar la nota en el diccionario
+        }
+
+        // Mostrar las notas
+        Console.WriteLine("\nResultados:");
+        foreach (var asignatura in asignaturas)
+        {
+            Console.WriteLine($"En {asignatura} has sacado {notas[asignatura]}");
+        }
+    }
+}
