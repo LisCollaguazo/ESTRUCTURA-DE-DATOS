@@ -1,0 +1,37 @@
+"Escribir un programa que pida al usuario una palabra y muestre por pantalla si es un palíndromo"
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Pedir al usuario que ingrese una palabra
+        Console.Write("Introduce una palabra: ");
+        string palabra = Console.ReadLine();
+
+        // Verificar si la palabra es un palíndromo
+        if (EsPalindromo(palabra))
+        {
+            Console.WriteLine($"La palabra '{palabra}' es un palíndromo.");
+        }
+        else
+        {
+            Console.WriteLine($"La palabra '{palabra}' no es un palíndromo.");
+        }
+    }
+
+    // Método para verificar si una palabra es un palíndromo
+    static bool EsPalindromo(string palabra)
+    {
+        // Convertir la palabra a minúsculas y eliminar espacios
+        string palabraLimpiada = palabra.ToLower().Replace(" ", "");
+
+        // Invertir la palabra
+        char[] arrayPalabra = palabraLimpiada.ToCharArray();
+        Array.Reverse(arrayPalabra);
+        string palabraInvertida = new string(arrayPalabra);
+
+        // Comparar la palabra original con la invertida
+        return palabraLimpiada == palabraInvertida;
+    }
+}
