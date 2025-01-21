@@ -1,0 +1,69 @@
+"Crear un programa que maneje N° cantidad de datos de tipo entero en dos listas por el inicio."
+"Debe existir un ciclo de carga para la primera lista y otro ciclo de carga para laDebe existir un ciclo de carga para la primera lista y otro ciclo de carga para la segunda lista.segunda lista."
+"Una vez cargados los datos en las listas, el programa debe comparar las dos listas paraUna vez cargados los datos en las listas, el programa debe comparar las dos listas para"
+"verificar si ambas listas son iguales enverificar si ambas listas son iguales en tamaño y contenido, es decir que sitamaño y contenido, es decir que si tienen la mismatienen la misma"
+"cantidad de datos y si los datos están cargados en el mismo orden. Una vez realizada, lacantidad de datos y si los datos están cargados en el mismo orden. Una vez realizada, la"
+"verificación. El programa debe mostrar:verificación. El programa debe mostrar:"
+"a. Si las listas sonSi las listas son iguales en tamaño y eniguales en tamaño y en contenido.contenido."
+"b. Si las listas sonSi las listas son iguales en tamaño pero no eniguales en tamaño pero no en contenido.contenido."
+"c. No tienen el mismo tamaño niNo tienen el mismo tamaño ni contenido.contenido."
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<int> lista1 = new List<int>();
+        List<int> lista2 = new List<int>();
+
+        // Cargar la primera lista
+        Console.WriteLine("Ingrese la cantidad de elementos para la primera lista:");
+        int cantidad1 = int.Parse(Console.ReadLine());
+        Console.WriteLine("Ingrese los elementos de la primera lista:");
+        for (int i = 0; i < cantidad1; i++)
+        {
+            Console.Write($"Elemento {i + 1}: ");
+            int elemento = int.Parse(Console.ReadLine());
+            lista1.Add(elemento);
+        }
+
+        // Cargar la segunda lista
+        Console.WriteLine("Ingrese la cantidad de elementos para la segunda lista:");
+        int cantidad2 = int.Parse(Console.ReadLine());
+        Console.WriteLine("Ingrese los elementos de la segunda lista:");
+        for (int i = 0; i < cantidad2; i++)
+        {
+            Console.Write($"Elemento {i + 1}: ");
+            int elemento = int.Parse(Console.ReadLine());
+            lista2.Add(elemento);
+        }
+
+        // Comparar las listas
+        if (lista1.Count == lista2.Count)
+        {
+            bool sonIguales = true;
+            for (int i = 0; i < lista1.Count; i++)
+            {
+                if (lista1[i] != lista2[i])
+                {
+                    sonIguales = false;
+                    break;
+                }
+            }
+
+            if (sonIguales)
+            {
+                Console.WriteLine("Las listas son iguales en tamaño y contenido.");
+            }
+            else
+            {
+                Console.WriteLine("Las listas son iguales en tamaño pero no en contenido.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Las listas no tienen el mismo tamaño ni contenido.");
+        }
+    }
+}
