@@ -1,0 +1,71 @@
+"Nombre: Liseth Collaguazo"
+"Realice un algoritmo en C# y el uso de pilas para resolver el problema de las torres de Hanoi."
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        int numberOfDisks = 3; // Puedes cambiar el número de discos aquí
+        Stack<int> towerA = new Stack<int>();
+        Stack<int> towerB = new Stack<int>();
+        Stack<int> towerC = new Stack<int>();
+
+        // Inicializar la torre A con discos
+        for (int i = numberOfDisks; i >= 1; i--)
+        {
+            towerA.Push(i);
+        }
+
+        // Mostrar el estado inicial
+        Console.WriteLine("Estado inicial:");
+        DisplayTowers(towerA, towerB, towerC);
+
+        // Resolver el problema
+        MoveDisks(numberOfDisks, towerA, towerC, towerB);
+
+        // Mostrar el estado final
+        Console.WriteLine("Estado final:");
+        DisplayTowers(towerA, towerB, towerC);
+    }
+
+    static void MoveDisks(int n, Stack<int> source, Stack<int> target, Stack<int> auxiliary)
+    {
+        if (n == 1)
+        {
+            // Mover un disco directamente de la torre fuente a la torre objetivo
+            target.Push(source.Pop());
+            Console.WriteLine($"Mover disco de {GetTowerName(source)} a {GetTowerName(target)}");
+            return;
+        }
+
+        // Mover n-1 discos de la torre fuente a la torre auxiliar
+        MoveDisks(n - 1, source, auxiliary, target);
+
+        // Mover el disco restante de la torre fuente a la torre objetivo
+        target.Push(source.Pop());
+        Console.WriteLine($"Mover disco de {GetTowerName(source)} a {GetTowerName(target)}");
+
+        // Mover los n-1 discos de la torre auxiliar a la torre objetivo
+        MoveDisks(n - 1, auxiliary, target, source);
+    }
+
+    static string GetTowerName(Stack<int> tower)
+    {
+        if (tower == null) return "N/A";
+        if (tower == Program.towerA) return "A";
+        if (tower == Program.towerB) return "B";
+        if (tower == Program.towerC) return "C";
+        return "N/A";
+    }
+
+    static void DisplayTowers(Stack<int> towerA, Stack<int> towerB, Stack<int> towerC)
+    {
+        Console.WriteLine("Torre A: " + string.Join(", ", towerA));
+        Console.WriteLine("Torre B: " + string.Join(", ", towerB));
+        Console.WriteLine("Torre C: " + string.Join(", ", towerC));
+        Console.WriteLine();
+    }
+}
