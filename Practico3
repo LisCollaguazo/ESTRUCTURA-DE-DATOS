@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+struct Jugador {
+    std::string nombre;
+    int edad;
+    std::string posicion;
+};
+
+struct Equipo {
+    std::string nombre;
+    std::vector<Jugador> jugadores;
+};
+
+class Torneo {
+private:
+    std::vector<Equipo> equipos;
+
+public:
+    void agregarEquipo(const Equipo& equipo) {
+        equipos.push_back(equipo);
+    }
+
+    void mostrarEquipos() {
+        for (const auto& equipo : equipos) {
+            std::cout << "Equipo: " << equipo.nombre << std::endl;
+            std::cout << "Jugadores:" << std::endl;
+            for (const auto& jugador : equipo.jugadores) {
+                std::cout << " - " << jugador.nombre << ", Edad: " << jugador.edad << ", Posición: " << jugador.posicion << std::endl;
+            }
+            std::cout << std::endl;
+        }
+    }
+};
+
+int main() {
+    Torneo torneo;
+
+    // Crear un equipo y agregar jugadores
+    Equipo equipo1;
+    equipo1.nombre = "Los Tigres";
+
+    Jugador jugador1 = {"Juan Perez", 25, "Delantero"};
+    Jugador jugador2 = {"Carlos Gomez", 22, "Defensa"};
+    equipo1.jugadores.push_back(jugador1);
+    equipo1.jugadores.push_back(jugador2);
+
+    torneo.agregarEquipo(equipo1);
+
+    // Crear otro equipo y agregar jugadores
+    Equipo equipo2;
+    equipo2.nombre = "Los Leones";
+
+    Jugador jugador3 = {"Luis Martinez", 30, "Portero"};
+    Jugador jugador4 = {"Pedro Sanchez", 28, "Centrocampista"};
+    equipo2.jugadores.push_back(jugador3);
+    equipo2.jugadores.push_back(jugador4);
+
+    torneo.agregarEquipo(equipo2);
+
+    // Mostrar equipos y jugadores
+    torneo.mostrarEquipos();
+
+    return 0;
+}
