@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<string> catalogo = new List<string>
+        {
+            "Revista de Ciencia",
+            "Revista de Tecnología",
+            "Revista de Historia",
+            "Revista de Arte",
+            "Revista de Literatura",
+            "Revista de Salud",
+            "Revista de Deportes",
+            "Revista de Naturaleza",
+            "Revista de Economía",
+            "Revista de Política"
+        };
+
+        while (true)
+        {
+            Console.WriteLine("Menú:");
+            Console.WriteLine("1. Buscar un título");
+            Console.WriteLine("2. Salir");
+            Console.Write("Seleccione una opción: ");
+            string opcion = Console.ReadLine();
+
+            if (opcion == "1")
+            {
+                Console.Write("Ingrese el título a buscar: ");
+                string tituloBuscado = Console.ReadLine();
+                bool encontrado = BuscarTituloIterativo(catalogo, tituloBuscado);
+                Console.WriteLine(encontrado ? "Encontrado" : "No encontrado");
+            }
+            else if (opcion == "2")
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Opción no válida. Intente de nuevo.");
+            }
+        }
+    }
+
+    // Búsqueda iterativa
+    static bool BuscarTituloIterativo(List<string> catalogo, string titulo)
+    {
+        foreach (var item in catalogo)
+        {
+            if (item.Equals(titulo, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Búsqueda recursiva
+    static bool BuscarTituloRecursivo(List<string> catalogo, string titulo, int index = 0)
+    {
+        if (index >= catalogo.Count)
+        {
+            return false;
+        }
+        if (catalogo[index].Equals(titulo, StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+        return BuscarTituloRecursivo(catalogo, titulo, index + 1);
+    }
+}
